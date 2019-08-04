@@ -3,9 +3,10 @@
 
 #define POWVFILE "POWV9.dat"    // LUT for POWV (Wirelength Vector)
 #define POSTFILE "POST9.dat"    // LUT for POST (Steiner Tree)
-#define MAXD 350    // max. degree of a net that can be handled
+#define MAXD 1000    // max. degree of a net that can be handled
                     // Setting MAXD to more than 150 is not recommended
                     // jalamorm change to 350 in 12/13/2007
+                    // Jinkela Huang change to 1000 in 8/4/2019
 
 #ifndef DTYPE   // Data type for distance
 #define DTYPE double
