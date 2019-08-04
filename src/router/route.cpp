@@ -36,9 +36,11 @@ int main(int argc, char* argv[])
         <<"=                       Iowa State University         ="<<endl
         <<"= http://home.eng.iastate.edu/~cnchu/                 ="<<endl
         <<"======================================================="<<endl
-        <<"= Using Google Sparse Hash Map                        ="<<endl
-        <<"= For internal data structure                         ="<<endl
-        <<"= http://code.google.com/p/google-sparsehash/         ="<<endl
+        <<"======================================================="<<endl
+        <<"= Jinkela Shengdiyage                                 ="<<endl
+        <<"= Fix undefined behavior and use c++11                ="<<endl
+        <<"=                       Chao-Yuan Huang               ="<<endl
+        <<"= https://github.com/jacky860226/nthu-route           ="<<endl
         <<"======================================================="<<endl;
         
     clock_t t0 = clock();
