@@ -24,9 +24,9 @@ int main(int argc, char* argv[])
 {
     cout<<"======================================================="<<endl
         <<"= NTHU-Route                                          ="<<endl
-        <<"= Version 2.0 is deveploped by                        ="<<endl
+        <<"= Version 2.11 is deveploped by                       ="<<endl
         <<"= Yen-Jung Chang, Yu-ting Lee, Tsung-Hsien Lee        ="<<endl
-        <<"= Jhih-Rong Gao, Pei-Ci Wu                            ="<<endl
+        <<"= Jhih-Rong Gao, Pei-Ci Wu, Chao-Yuan Huang           ="<<endl
         <<"= Adviser: Ting-Chi Wang (tcwang@cs.nthu.edu.tw)      ="<<endl
         <<"= http://www.cs.nthu.edu.tw/~tcwang/nthuroute/        ="<<endl
         <<"======================================================="<<endl<<endl
