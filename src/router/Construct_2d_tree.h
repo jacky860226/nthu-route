@@ -8,8 +8,6 @@
 #include "misc/geometry.h"
 #include "flute/flute-ds.h"
 #include "util/traversemap.h"
-#include "google/dense_hash_map"
-#include "google/sparse_hash_map"
 
 #include <iostream>
 #include <fstream>
@@ -18,13 +16,12 @@
 #include <map>
 #include <ext/hash_map>
 #include <string>
+#include <unordered_map>
 
 using std::vector;
 using std::set;
 using std::map;
 using __gnu_cxx::hash_map;
-using google::dense_hash_map;
-using google::sparse_hash_map;
 
 //If wanna run IBM testcase, please enable this define
 //#define IBM_CASE
@@ -95,7 +92,7 @@ class Vertex_flute
         :x(x), y(y), visit(0)/*, copy_ind(-1)*/ {}
 };
 
-typedef dense_hash_map<int, int> RoutedNetTable;
+typedef std::unordered_map<int, int> RoutedNetTable;
 class Edge_2d {
     public:
     Edge_2d();
@@ -103,7 +100,7 @@ class Edge_2d {
     public:
     double cur_cap;
 	double max_cap;
-	int history;	    
+	int history;
 	RoutedNetTable used_net; 
 
     bool isOverflow() {return (cur_cap > max_cap);}
@@ -113,7 +110,7 @@ class Edge_2d {
     double congestion() {return (cur_cap / max_cap);}
 };
 
-typedef dense_hash_map<int, int> LRoutedNetTable;
+typedef std::unordered_map<int, int> LRoutedNetTable;
 class Edge_3d {
     public:
     Edge_3d();

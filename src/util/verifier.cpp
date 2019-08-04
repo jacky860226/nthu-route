@@ -6,6 +6,7 @@
 #include "grdb/RoutingComponent.h"
 #include "misc/filehandler.h"
 
+#include <cstring>
 #include <string>
 #include <iostream>
 #include <cmath>

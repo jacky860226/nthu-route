@@ -7,6 +7,7 @@
 #include "parser.h"
 #include "misc/debug.h"
 #include <cstring>
+#include <cstdlib>
 #include <iostream>
 
 #define MAX_STRING_BUFER_LENGTH 512

@@ -7,6 +7,7 @@
 #include "util/traversemap.h"
 #include "misc/geometry.h"
 
+#include <climits>
 #include <cmath>
 #include <algorithm>
 
@@ -68,19 +69,13 @@ Edge_2d::Edge_2d()
  max_cap(0.),
  history(1),
  used_net(128)
-{
-    used_net.set_empty_key(-2);
-    used_net.set_deleted_key(-1);
-}
+{}
 
 Edge_3d::Edge_3d()
 :max_cap(0),
  cur_cap(0),
  used_net(5)
-{
-    used_net.set_empty_key(-2);
-    used_net.set_deleted_key(-1);
-}
+{}
 
 Edge_3d_ptr Create_Edge_3d()
 {
@@ -2066,7 +2061,7 @@ double construct_2d_tree(RoutingRegion *rr)
         BOXSIZE_INC += routing_parameter->get_box_size_inc_p2();
     }
 	
-	output_2_pin_list();	//order:bbox¤p 
+	output_2_pin_list();	//order:bboxï¿½p 
 
 #ifdef FREE
 	free_memory_con2d();

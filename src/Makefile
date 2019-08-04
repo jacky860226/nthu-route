@@ -45,7 +45,7 @@ WarnOptions = -W -Wall -Wno-missing-braces
 IncDirs      = -I. $(ZlibIncDir) $(FlutelibIncDir)
 CxxOptions   = $(WarnOptions) $(DebugOptions)
 
-CXXFLAGS     = $(CxxOptions) $(IncDirs)
+CXXFLAGS     = -std=c++11 $(CxxOptions) $(IncDirs)
 COMPILE_CXX  = $(CXX) $(CXXFLAGS)
 LINK_CXX     = $(CXX) $(CXXFLAGS)
 

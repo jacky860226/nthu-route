@@ -33,7 +33,7 @@ class WireSegments{
         std::vector<WireSegment> segments;
 		int lineDirection(
 			int x1, int y1, int z1,
-		    int x2, int y2, int z1
+		    int x2, int y2, int z2
 		);
 	public:
 		WireSegments();
@@ -43,7 +43,7 @@ class WireSegments{
 		//		 cell, new wire segment need to be added.
 		bool add_segment(
 			int x1, int y1, int z1,
-			int x2, int y2, int z1
+			int x2, int y2, int z2
 		);
 		bool extend_segment(int wirePos, int x, int y, int z);
 		void remove(int wirePos);
