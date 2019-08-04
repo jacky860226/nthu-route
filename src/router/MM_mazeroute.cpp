@@ -67,7 +67,7 @@ void Multisource_multisink_mazeroute::adjust_twopin_element()
 	this->element->pin2 = coor_array[new_pin2->x][new_pin2->y];
 	
 	vector<Vertex_mmm *>::iterator it;
-	int flag=0;
+	//int flag = 0;
 	for(it = this->pin1_v->neighbor.begin(); 
         it != this->pin1_v->neighbor.end();
         ++it)
@@ -75,13 +75,13 @@ void Multisource_multisink_mazeroute::adjust_twopin_element()
 		if((*it) == this->pin2_v)
 		{
 			this->pin1_v->neighbor.erase(it);
-			flag = 1;
+			//flag = 1;
 			break;
 		}
     }
-    assert(flag == 1);
+    //assert(flag == 1);
 
-	flag=0;
+	//flag=0;
 	for(it = this->pin2_v->neighbor.begin();
         it != this->pin2_v->neighbor.end();
         ++it)
@@ -89,11 +89,11 @@ void Multisource_multisink_mazeroute::adjust_twopin_element()
 		if((*it) == this->pin1_v)
 		{
 			this->pin2_v->neighbor.erase(it);
-			flag = 1;
+			//flag = 1;
 			break;
 		}
     }
-    assert(flag == 1);
+    //assert(flag == 1);
 
 	int net_id = this->element->net_id;
 	Vertex_mmm* v1 = NULL;

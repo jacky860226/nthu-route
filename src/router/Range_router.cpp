@@ -319,8 +319,8 @@ static void range_router(Two_pin_element_2d * two_pin)
 	if ( !check_path_no_overflow(&two_pin->path,two_pin->net_id, false) )
 	{
 		++total_twopin;
-        Coordinate_2d pin1 = two_pin->pin1;
-        Coordinate_2d pin2 = two_pin->pin2;
+        //Coordinate_2d pin1 = two_pin->pin1;
+        //Coordinate_2d pin2 = two_pin->pin2;
 
         NetDirtyBit[two_pin->net_id] = true;
 

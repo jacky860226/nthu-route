@@ -14,14 +14,12 @@
 #include <vector>
 #include <set>
 #include <map>
-#include <ext/hash_map>
 #include <string>
 #include <unordered_map>
 
 using std::vector;
 using std::set;
 using std::map;
-using __gnu_cxx::hash_map;
 
 //If wanna run IBM testcase, please enable this define
 //#define IBM_CASE

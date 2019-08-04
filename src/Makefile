@@ -31,13 +31,13 @@ GDlibrary = -lgd
 ##  library
 
 
-DebugOptions = -O3 -DNDEBUG -static -funroll-loops -march=nocona -finline-functions
+DebugOptions = -O3 -DNDEBUG -funroll-loops -march=nocona -finline-functions
 ##  Add -DNDEBUG to remove the debugging assertions (unwise at this stage).
 ##  You might have to remove -g or -O2 if your C++ compiler cannot
 ##  handle both together.
 
 
-WarnOptions = -W -Wall -Wno-missing-braces
+WarnOptions = -W -Wall -Wextra -Wno-missing-braces
 ##  Warning options.  Enable all warnings except for those about missing
 ##  braces in struct/array initializer lists.
 

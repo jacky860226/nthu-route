@@ -1757,7 +1757,6 @@ void traverse_tree(double *ori_cost)
 	double cur_cost,tmp_cost,best_cost;
 	int best_pos = 0;
 	Vertex_flute_ptr node;
-	bool node_removed;
 	
 	for(vector<Vertex_flute_ptr>::iterator it_v = vertex_fl.begin();
         it_v != vertex_fl.end();
@@ -1790,7 +1789,7 @@ void traverse_tree(double *ori_cost)
 						}
 						if(best_cost < *ori_cost)	//edge need shifting
 						{
-							node_removed = move_edge(a, b, best_pos, HOR);	
+							move_edge(a, b, best_pos, HOR);	
                             //move to best position,exchange steiner points if needed
 							*ori_cost = best_cost;
 						}
@@ -1811,7 +1810,7 @@ void traverse_tree(double *ori_cost)
 						}
 						if(best_cost<*ori_cost)	//edge need shifting
 						{
-							node_removed=move_edge(a,b,best_pos,VER);	
+							move_edge(a,b,best_pos,VER);	
                             //move to best position,exchange steiner points if needed
 							*ori_cost=best_cost;
 						}
@@ -2015,7 +2014,7 @@ double construct_2d_tree(RoutingRegion *rr)
     mazeroute_in_range = new Multisource_multisink_mazeroute();
 	
 	
-	int pre_overflow = -1;
+	//int pre_overflow = -1;
     int cur_overflow = -1;
 	used_cost_flag = HISTORY_COST;
     BOXSIZE_INC = routing_parameter->get_init_box_size_p2();
@@ -2043,7 +2042,7 @@ double construct_2d_tree(RoutingRegion *rr)
 		//route_all_2pin_net(false);
 		route_all_2pin_net();
 
-		pre_overflow = cur_overflow;
+		//pre_overflow = cur_overflow;
 		cur_overflow = cal_max_overflow();
 		cal_total_wirelength();
 

@@ -133,7 +133,7 @@ int global_increase_vo;
 
 void print_max_overflow(void)
 {
-	int i, j, k, lines = 0, ii, jj, dir;
+	int i, j, k, lines = 0;//, ii, jj, dir;
 	int max = 0;
 	int sum = 0, temp_sum;
 	//int overflow_val;
@@ -150,9 +150,9 @@ void print_max_overflow(void)
 				{
 					if (cur_map_3d[i][j][k].edge_list[LEFT]->cur_cap - cur_map_3d[i][j][k].edge_list[LEFT]->max_cap > max)
 					{
-						ii = i;
-						jj = j;
-						dir = LEFT;
+						//ii = i;
+						//jj = j;
+						//dir = LEFT;
 						max = cur_map_3d[i][j][k].edge_list[LEFT]->cur_cap - cur_map_3d[i][j][k].edge_list[LEFT]->max_cap;
 					}
 					sum += (cur_map_3d[i][j][k].edge_list[LEFT]->cur_cap - cur_map_3d[i][j][k].edge_list[LEFT]->max_cap);
@@ -171,9 +171,9 @@ void print_max_overflow(void)
 				{
 				 	if (cur_map_3d[i][j][k].edge_list[BACK]->cur_cap - cur_map_3d[i][j][k].edge_list[BACK]->max_cap > max)
 					{
-						ii = i;
-						jj = j;
-						dir = BACK;
+						//ii = i;
+						//jj = j;
+						//dir = BACK;
 						max = cur_map_3d[i][j][k].edge_list[BACK]->cur_cap - cur_map_3d[i][j][k].edge_list[BACK]->max_cap;
 					}
 					sum += (cur_map_3d[i][j][k].edge_list[BACK]->cur_cap - cur_map_3d[i][j][k].edge_list[BACK]->max_cap);

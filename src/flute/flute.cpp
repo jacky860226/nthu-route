@@ -311,7 +311,7 @@ DTYPE flutes_wl_MD(int d, DTYPE xs[], DTYPE ys[], int s[], int acc)
     DTYPE x1[MAXD], x2[MAXD], y1[MAXD], y2[MAXD];
     int si[MAXD], s1[MAXD], s2[MAXD];
     float score[2*MAXD], penalty[MAXD], pnlty, dx, dy;
-    DTYPE ll, minl, extral;
+    DTYPE ll, minl, extral = 0.0;
     int i, r, p, maxbp, nbp, bp, ub, lb, n1, n2, newacc;
     int ms, mins, maxs, minsi, maxsi;
     DTYPE distx[MAXD], disty[MAXD], xydiff;
@@ -813,7 +813,7 @@ Tree flutes_MD(int d, DTYPE xs[], DTYPE ys[], int s[], int acc)
     int si[MAXD], s1[MAXD], s2[MAXD];
     float score[2*MAXD], penalty[MAXD], pnlty, dx, dy;
     DTYPE ll, minl, coord1, coord2;
-    int i, r, p, maxbp, bestbp, bp, nbp, ub, lb, n1, n2, nn1, nn2, newacc;
+    int i, r, p, maxbp, bestbp = 0, bp, nbp, ub, lb, n1, n2, nn1 = 0, nn2 = 0, newacc;
     Tree t, t1, t2, bestt1, bestt2;
     int ms, mins, maxs, minsi, maxsi;
     DTYPE distx[MAXD], disty[MAXD], xydiff;
@@ -1135,7 +1135,7 @@ Tree dmergetree(Tree t1, Tree t2)
 Tree hmergetree(Tree t1, Tree t2, int s[])
 {
     int i, prev, curr, next, extra, offset1, offset2;
-    int p, ii, n1, n2, nn1, nn2;
+    int p, ii = 0, n1, n2, nn1 = 0, nn2 = 0;
     DTYPE coord1, coord2;
     Tree t;
 
@@ -1405,8 +1405,8 @@ void plottree(Tree t)
     int i;
 
     for (i=0; i<2*t.deg-2; i++) {
-        printf("%d %d\n", t.branch[i].x, t.branch[i].y);
-        printf("%d %d\n\n", t.branch[t.branch[i].n].x,
+        printf("%lf %lf\n", t.branch[i].x, t.branch[i].y);
+        printf("%lf %lf\n\n", t.branch[t.branch[i].n].x,
                t.branch[t.branch[i].n].y);
     }
 }

@@ -7,7 +7,7 @@
 #include <list>
 #include <vector>
 #include <set>
-#include <ext/hash_map>
+#include <unordered_map>
 
 class RoutingRegion : public Builder {
 	public:
@@ -87,7 +87,7 @@ class RoutingRegion : public Builder {
 
     //First int is the net id given from input file,
     //the second id is the net position in NetList
-    typedef __gnu_cxx::hash_map<int, int> NetIdLookupTable;
+    typedef std::unordered_map<int, int> NetIdLookupTable;
     NetIdLookupTable* netSerial2NetId_;
 
     typedef std::set< std::pair<int, int> > PinTable;

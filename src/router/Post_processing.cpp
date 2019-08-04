@@ -136,8 +136,8 @@ void initial_for_post_processing()
 		// call maze routing
 		if (counter[i].total_overflow > 0)
 		{
-            Coordinate_2d pin1 = two_pin_list[id]->pin1;
-            Coordinate_2d pin2 = two_pin_list[id]->pin2;
+            //Coordinate_2d pin1 = two_pin_list[id]->pin1;
+            //Coordinate_2d pin2 = two_pin_list[id]->pin2;
 
 			no_overflow = check_path_no_overflow(&two_pin_list[id]->path,two_pin_list[id]->net_id,false);
 			if (no_overflow)
