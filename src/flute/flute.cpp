@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <climits>
+#include <cmath>
 #include "flute.h"
 
 #if D<=7
@@ -121,13 +121,18 @@ void readLUT()
 
 DTYPE flute_wl(int d, DTYPE x[], DTYPE y[], int acc)
 {
-    DTYPE xs[MAXD], ys[MAXD], minval, l, xu, xl, yu, yl;
-    int s[MAXD];
+    DTYPE *xs, *ys, minval, l, xu, xl, yu, yl;
+    int *s;
     int i, j, k, minidx;
     struct point {
         DTYPE x, y;
         int o;
-    } pt[MAXD], *ptp[MAXD], *tmpp;
+    } *pt, **ptp, *tmpp;
+    xs = new DTYPE[d];
+    ys = new DTYPE[d];
+    s = new int[d];
+    pt = new point[d+5];
+    ptp = new point*[d+5];
 
     if (d==2)
         l = ADIFF(x[0], x[1]) + ADIFF(y[0], y[1]);
@@ -210,6 +215,11 @@ DTYPE flute_wl(int d, DTYPE x[], DTYPE y[], int acc)
         
         l = flutes_wl(d, xs, ys, s, acc);
     }
+    delete[] xs;
+    delete[] ys;
+    delete[] s;
+    delete[] pt;
+    delete[] ptp;
     return l;
 }
 
@@ -308,13 +318,24 @@ DTYPE flutes_wl_LD(int d, DTYPE xs[], DTYPE ys[], int s[])
 // For medium-degree, i.e., D+1 <= d
 DTYPE flutes_wl_MD(int d, DTYPE xs[], DTYPE ys[], int s[], int acc)
 {
-    DTYPE x1[MAXD], x2[MAXD], y1[MAXD], y2[MAXD];
-    int si[MAXD], s1[MAXD], s2[MAXD];
-    float score[2*MAXD], penalty[MAXD], pnlty, dx, dy;
+    DTYPE *x1, *x2, *y1, *y2;
+    int *si, *s1, *s2;
+    float *score, *penalty, pnlty, dx, dy;
     DTYPE ll, minl, extral = 0.0;
     int i, r, p, maxbp, nbp, bp, ub, lb, n1, n2, newacc;
     int ms, mins, maxs, minsi, maxsi;
-    DTYPE distx[MAXD], disty[MAXD], xydiff;
+    DTYPE *distx, *disty, xydiff;
+    x1 = new DTYPE[d];
+    x2 = new DTYPE[d];
+    y1 = new DTYPE[d];
+    y2 = new DTYPE[d];
+    si = new int[d];
+    s1 = new int[d];
+    s2 = new int[d];
+    score = new float[2*d];
+    penalty = new float[d];
+    distx = new DTYPE[d];
+    disty = new DTYPE[d];
 
     if (s[0] < s[d-1]) {
         ms = max(s[0], s[1]);
@@ -334,8 +355,19 @@ DTYPE flutes_wl_MD(int d, DTYPE xs[], DTYPE ys[], int s[], int acc)
             for (i=1; i<=d-1-ms; i++)
                 s2[i] = s[i+ms]-ms;
             
-            return flutes_wl_LMD(ms+2, x1, y1, s1, acc)
-                + flutes_wl_LMD(d-ms, xs+ms, ys+ms, s2, acc);
+            auto res = flutes_wl_LMD(ms+2, x1, y1, s1, acc) + flutes_wl_LMD(d-ms, xs+ms, ys+ms, s2, acc);
+            delete[] x1;
+            delete[] x2;
+            delete[] y1;
+            delete[] y2;
+            delete[] si;
+            delete[] s1;
+            delete[] s2;
+            delete[] score;
+            delete[] penalty;
+            delete[] distx;
+            delete[] disty;
+            return res;
         }
     }    
     else {  // (s[0] > s[d-1])
@@ -359,8 +391,19 @@ DTYPE flutes_wl_MD(int d, DTYPE xs[], DTYPE ys[], int s[], int acc)
             for (i=1; i<=ms; i++)
                 s2[i] = s[i+d-1-ms];
             
-            return flutes_wl_LMD(d+1-ms, x1, y1, s1, acc)
-                + flutes_wl_LMD(ms+1, xs, ys+d-1-ms, s2, acc);
+            auto res =  flutes_wl_LMD(d+1-ms, x1, y1, s1, acc) + flutes_wl_LMD(ms+1, xs, ys+d-1-ms, s2, acc);
+            delete[] x1;
+            delete[] x2;
+            delete[] y1;
+            delete[] y2;
+            delete[] si;
+            delete[] s1;
+            delete[] s2;
+            delete[] score;
+            delete[] penalty;
+            delete[] distx;
+            delete[] disty;
+            return res;
         }
     }
     
@@ -533,20 +576,37 @@ DTYPE flutes_wl_MD(int d, DTYPE xs[], DTYPE ys[], int s[], int acc)
         }
         if (minl > ll) minl = ll;
     }
+    delete[] x1;
+    delete[] x2;
+    delete[] y1;
+    delete[] y2;
+    delete[] si;
+    delete[] s1;
+    delete[] s2;
+    delete[] score;
+    delete[] penalty;
+    delete[] distx;
+    delete[] disty;
     return minl;
 }
 
 Tree flute(int d, DTYPE x[], DTYPE y[], int acc)
 {
-    DTYPE xs[MAXD], ys[MAXD], minval;
-    int s[MAXD];
+    DTYPE *xs, *ys, minval;
+    int *s;
     int i, j, k, minidx;
     struct point {
         DTYPE x, y;
         int o;
-    } pt[MAXD], *ptp[MAXD], *tmpp;
+    } *pt, **ptp, *tmpp;
     Tree t;
     
+    xs = new DTYPE[d];
+    ys = new DTYPE[d];
+    s = new int[d];
+    pt = new point[d+5];
+    ptp = new point*[d+5];
+
     if (d==2) {
         t.deg = 2;
         t.length = ADIFF(x[0], x[1]) + ADIFF(y[0], y[1]);
@@ -618,6 +678,11 @@ Tree flute(int d, DTYPE x[], DTYPE y[], int acc)
         
         t = flutes(d, xs, ys, s, acc);
     }
+    delete[] xs;
+    delete[] ys;
+    delete[] s;
+    delete[] pt;
+    delete[] ptp;
     return t;
 }
 
@@ -809,14 +874,26 @@ Tree flutes_LD(int d, DTYPE xs[], DTYPE ys[], int s[])
 // For medium-degree, i.e., D+1 <= d
 Tree flutes_MD(int d, DTYPE xs[], DTYPE ys[], int s[], int acc)
 {
-    DTYPE x1[MAXD], x2[MAXD], y1[MAXD], y2[MAXD];
-    int si[MAXD], s1[MAXD], s2[MAXD];
-    float score[2*MAXD], penalty[MAXD], pnlty, dx, dy;
+    DTYPE *x1, *x2, *y1, *y2;
+    int *si, *s1, *s2;
+    float *score, *penalty, pnlty, dx, dy;
     DTYPE ll, minl, coord1, coord2;
     int i, r, p, maxbp, bestbp = 0, bp, nbp, ub, lb, n1, n2, nn1 = 0, nn2 = 0, newacc;
     Tree t, t1, t2, bestt1, bestt2;
     int ms, mins, maxs, minsi, maxsi;
-    DTYPE distx[MAXD], disty[MAXD], xydiff;
+    DTYPE *distx, *disty, xydiff;
+
+    x1 = new DTYPE[d];
+    x2 = new DTYPE[d];
+    y1 = new DTYPE[d];
+    y2 = new DTYPE[d];
+    si = new int[d];
+    s1 = new int[d];
+    s2 = new int[d];
+    score = new float[2*d];
+    penalty = new float[d];
+    distx = new DTYPE[d];
+    disty = new DTYPE[d];
 
     if (s[0] < s[d-1]) {
         ms = max(s[0], s[1]);
@@ -841,7 +918,17 @@ Tree flutes_MD(int d, DTYPE xs[], DTYPE ys[], int s[], int acc)
             t = dmergetree(t1, t2);
             free(t1.branch);
             free(t2.branch);
-            
+            delete[] x1;
+            delete[] x2;
+            delete[] y1;
+            delete[] y2;
+            delete[] si;
+            delete[] s1;
+            delete[] s2;
+            delete[] score;
+            delete[] penalty;
+            delete[] distx;
+            delete[] disty;
             return t;
         }
     }
@@ -871,7 +958,17 @@ Tree flutes_MD(int d, DTYPE xs[], DTYPE ys[], int s[], int acc)
             t = dmergetree(t1, t2);
             free(t1.branch);
             free(t2.branch);
-            
+            delete[] x1;
+            delete[] x2;
+            delete[] y1;
+            delete[] y2;
+            delete[] si;
+            delete[] s1;
+            delete[] s2;
+            delete[] score;
+            delete[] penalty;
+            delete[] distx;
+            delete[] disty;
             return t;
         }
     }
@@ -1082,7 +1179,17 @@ Tree flutes_MD(int d, DTYPE xs[], DTYPE ys[], int s[], int acc)
     
     free(bestt1.branch);
     free(bestt2.branch);
-
+    delete[] x1;
+    delete[] x2;
+    delete[] y1;
+    delete[] y2;
+    delete[] si;
+    delete[] s1;
+    delete[] s2;
+    delete[] score;
+    delete[] penalty;
+    delete[] distx;
+    delete[] disty;
     return t;
 }
 

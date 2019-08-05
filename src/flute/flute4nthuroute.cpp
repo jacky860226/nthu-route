@@ -6,28 +6,19 @@ Flute::Flute ()
  y_(NULL)
 {
     readLUT();      //Read in the binary lookup table - POWVFILE, POSTFILE
-
-    x_ = new DTYPE[MAXD];    //int array used as input of FLUTE
-    y_ = new DTYPE[MAXD];    //int array used as input of FLUTE
 }
 
 Flute::~Flute () 
 {
-    if (x_ != NULL) {
-        delete[] x_;
-    }
-    if (y_ != NULL) {
-        delete[] y_;
-    }
+    
 }
 
 void Flute::routeNet (const PinptrList& pinList, Tree& routingTree)
 {
     int pinNumber = pinList.size();
 
-    //The pin number must <= MAXD, or the flute will crash
-    assert (pinNumber <= MAXD);
-
+    x_ = new DTYPE[pinNumber];    //int array used as input of FLUTE
+    y_ = new DTYPE[pinNumber];    //int array used as input of FLUTE
     // insert 2D-coordinate of pins of a net into x_ and y_
     for (int pinId = 0; pinId < pinNumber; ++pinId) {
         x_[pinId] = pinList[pinId]->x();
@@ -36,6 +27,15 @@ void Flute::routeNet (const PinptrList& pinList, Tree& routingTree)
 
     // obtain the routing tree by FLUTE
     routingTree = flute(pinNumber, x_, y_, ACCURACY);
+
+    if (x_ != NULL) {
+        delete[] x_;
+        x_ = NULL;
+    }
+    if (y_ != NULL) {
+        delete[] y_;
+        y_ = NULL;
+    }
 }
 
 void Flute::printTree (Tree& routingTree)
