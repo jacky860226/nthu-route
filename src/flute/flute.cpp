@@ -1380,13 +1380,17 @@ Tree vmergetree(Tree t1, Tree t2)
 void local_refinement(Tree *tp, int p)
 {
     int d, dd, i, ii, j, prev, curr, next, root;
-    int SteinerPin[2*MAXD], index[2*MAXD];
-    DTYPE x[MAXD], xs[D], ys[D];
+    int *SteinerPin, *index;
+    DTYPE *x, xs[D], ys[D];
     int ss[D];
     Tree tt;
  
     d = tp->deg;
     root = tp->branch[p].n;
+
+    SteinerPin = new int[d*2+5];
+    index = new int[d*2+5];
+    x = new DTYPE[d+5];
 
 // Reverse edges to point to root    
     prev = root;
@@ -1475,7 +1479,9 @@ void local_refinement(Tree *tp, int p)
         }
         free(tt.branch);
     }
-    
+    delete[] SteinerPin;
+    delete[] index;
+    delete[] x;
     return;
 }
 
