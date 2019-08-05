@@ -8,7 +8,7 @@ $ git clone https://github.com/jacky860226/nthu-route.git
 
 **Step 2:** Go to the project root and build by
 ~~~
-$ cd nthu-route
+$ cd nthu-route/src
 $ make clean
 $ make all
 ~~~
